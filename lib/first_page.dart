@@ -9,6 +9,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
   String _msg2 = '';
+  int _clicks = 0;
 
   @override
   Widget build(BuildContext context) {
