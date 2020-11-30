@@ -74,10 +74,12 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       //_enabled is false.
                       setState(() {
                         if (_enabled) {
-                          _msg1 = 'Enabled';
+                          _msg1 = 'Click Me';
+                          _msg2 = 'Reset';
                           print('_enabled is true');
                         } else {
                           _msg1 = '';
+                          _msg2 = '';
                           print('_enabled is false');
                         }
                       });
