@@ -9,6 +9,19 @@ class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
   String _msg2 = '';
+  int _clicks = 0;
+
+  void _count() {
+    setState(() {
+      _clicks += 1;
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _clicks = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +68,17 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       //_enabled is false.
                       setState(() {
                         if (_enabled) {
-                          _msg1 = 'Enabled';
-                          _msg2 = 'Reset';
-                          print('_enabled is true');
+                          if (_clicks == 0) {
+                            _msg1 = 'Click Me';
+                            _msg2 = 'Reset';
+                            print('_enabled is true');
+                          } else {
+                            _msg1 = 'Clicked $_clicks';
+                            _msg2 = 'Reset';
+                          }
                         } else {
                           _msg1 = '';
+                          _msg2 = '';
                           print('_enabled is false');
                         }
                       });
@@ -72,6 +91,9 @@ class _MyFirstPageState extends State<MyFirstPage> {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: MaterialButton(
+                    onPressed: () {
+                      _count();
+                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 8,
@@ -88,7 +110,6 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //At this time the button will appear and be enabled.
                     //If _enabled is false onPressed1 will return
                     //null and the button will disappear and be disabled.
-                    onPressed: onPressed1(),
 
                     //The text of the button works separately from the button
                     //itself so we must update it when the switch is changed.
@@ -114,7 +135,9 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //At this time the button will appear and be enabled.
                     //If _enabled is false onPressed1 will return
                     //null and the button will disappear and be disabled.
-                    onPressed: onPressed1(),
+                    onPressed: () {
+                      _reset();
+                    },
 
                     //The text of the button works separately from the button
                     //itself so we must update it when the switch is changed.
