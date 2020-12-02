@@ -11,19 +11,12 @@ class _MyFirstPageState extends State<MyFirstPage> {
   String _msg2 = '';
   int _count = 0;
 
-  void counter() {
-    if (_enabled == true) {
-      setState(() {
-        _count++;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     Object onPressed1() {
       if (_enabled) {
         print('onPressed1 returning address of anon func but NOT running it');
+
         return () {
           print('Anon func now running as button pressed');
           //Because there are no () this anonymous function
