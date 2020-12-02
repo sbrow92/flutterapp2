@@ -16,10 +16,9 @@ class _MyFirstPageState extends State<MyFirstPage> {
     Object onPressed1() {
       if (_enabled) {
         print('onPressed1 returning address of anon func but NOT running it');
-        _count += 1;
         return () {
-          print('Anon func now running as button pressed');
-          print(_count);
+          _count += 1;
+          print('Button Pressed $_count');
           //Because there are no () this anonymous function
           //is NOT called but the address of it is returned to who ever
           //called onPressed1.
