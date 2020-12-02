@@ -9,7 +9,6 @@ class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
   String _msg2 = '';
-  int _clicks = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +26,6 @@ class _MyFirstPageState extends State<MyFirstPage> {
         };
       } else {
         print('onPressed1 returning NULL');
-        return null;
-      }
-    }
-
-    Object onPressed2() {
-      if (_enabled) {
-        print(
-            'onPressed2 returning a null as the result of running the anonymous function');
-        return () {
-          print('Anon func now running, returning a null');
-          //These () are what makes the anonymous function run
-          //every time that onPressed2 is called,
-          //and that happens every time the build runs.
-          //Since the anonymous function does not return anything
-          //a null is sent back to who ever called onPressed2.
-          //This means that the button will never show using onPressed2.
-        }();
-      } else {
-        print('onPressed2 returning NULL');
         return null;
       }
     }
@@ -75,12 +55,11 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       //_enabled is false.
                       setState(() {
                         if (_enabled) {
-                          _msg1 = 'Click Me';
+                          _msg1 = 'Enabled';
                           _msg2 = 'Reset';
                           print('_enabled is true');
                         } else {
                           _msg1 = '';
-                          _msg2 = '';
                           print('_enabled is false');
                         }
                       });
@@ -111,11 +90,6 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //null and the button will disappear and be disabled.
                     onPressed: onPressed1(),
 
-                    //If we call onPressed2 instead of onPressed1 the
-                    //anonymous function will run but the button
-                    //will NOT appear, THIS DOES NOT WORK.
-                    //onPressed: onPressed2(),
-
                     //The text of the button works separately from the button
                     //itself so we must update it when the switch is changed.
                     child: Text(_msg1),
@@ -128,7 +102,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 8,
                     textColor: Colors.red.shade100,
-                    color: Colors.lightBlueAccent,
+                    color: Colors.redAccent,
                     highlightColor: Colors.blue,
                     splashColor: Colors.green.shade300,
                     padding: EdgeInsets.all(20.0),
@@ -141,11 +115,6 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //If _enabled is false onPressed1 will return
                     //null and the button will disappear and be disabled.
                     onPressed: onPressed1(),
-
-                    //If we call onPressed2 instead of onPressed1 the
-                    //anonymous function will run but the button
-                    //will NOT appear, THIS DOES NOT WORK.
-                    //onPressed: onPressed2(),
 
                     //The text of the button works separately from the button
                     //itself so we must update it when the switch is changed.
