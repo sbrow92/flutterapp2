@@ -9,18 +9,14 @@ class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
   String _msg2 = '';
-  int _clicks = 0;
+  int _count = 0;
 
-  void _count() {
-    setState(() {
-      _clicks += 1;
-    });
-  }
-
-  void _reset() {
-    setState(() {
-      _clicks = 0;
-    });
+  void counter() {
+    if (_enabled == true) {
+      setState(() {
+        _count++;
+      });
+    }
   }
 
   @override
@@ -39,6 +35,25 @@ class _MyFirstPageState extends State<MyFirstPage> {
         };
       } else {
         print('onPressed1 returning NULL');
+        return null;
+      }
+    }
+
+    Object onPressed2() {
+      if (_enabled) {
+        print(
+            'onPressed2 returning a null as the result of running the anonymous function');
+        return () {
+          print('Anon func now running, returning a null');
+          //These () are what makes the anonymous function run
+          //every time that onPressed2 is called,
+          //and that happens every time the build runs.
+          //Since the anonymous function does not return anything
+          //a null is sent back to who ever called onPressed2.
+          //This means that the button will never show using onPressed2.
+        }();
+      } else {
+        print('onPressed2 returning NULL');
         return null;
       }
     }
@@ -68,14 +83,9 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       //_enabled is false.
                       setState(() {
                         if (_enabled) {
-                          if (_clicks == 0) {
-                            _msg1 = 'Click Me';
-                            _msg2 = 'Reset';
-                            print('_enabled is true');
-                          } else {
-                            _msg1 = 'Clicked $_clicks';
-                            _msg2 = 'Reset';
-                          }
+                          _msg1 = 'Click Me';
+                          _msg2 = 'Reset';
+                          print('_enabled is true');
                         } else {
                           _msg1 = '';
                           _msg2 = '';
@@ -91,13 +101,10 @@ class _MyFirstPageState extends State<MyFirstPage> {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: MaterialButton(
-                    onPressed: () {
-                      _count();
-                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 8,
-                    textColor: Colors.red.shade100,
+                    textColor: Colors.white,
                     color: Colors.redAccent,
                     highlightColor: Colors.blue,
                     splashColor: Colors.green.shade300,
@@ -110,6 +117,12 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //At this time the button will appear and be enabled.
                     //If _enabled is false onPressed1 will return
                     //null and the button will disappear and be disabled.
+                    onPressed: onPressed1(),
+
+                    //If we call onPressed2 instead of onPressed1 the
+                    //anonymous function will run but the button
+                    //will NOT appear, THIS DOES NOT WORK.
+                    //onPressed: onPressed2(),
 
                     //The text of the button works separately from the button
                     //itself so we must update it when the switch is changed.
@@ -122,8 +135,8 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 8,
-                    textColor: Colors.red.shade100,
-                    color: Colors.redAccent,
+                    textColor: Colors.white,
+                    color: Colors.lightBlue,
                     highlightColor: Colors.blue,
                     splashColor: Colors.green.shade300,
                     padding: EdgeInsets.all(20.0),
@@ -135,9 +148,12 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //At this time the button will appear and be enabled.
                     //If _enabled is false onPressed1 will return
                     //null and the button will disappear and be disabled.
-                    onPressed: () {
-                      _reset();
-                    },
+                    onPressed: onPressed1(),
+
+                    //If we call onPressed2 instead of onPressed1 the
+                    //anonymous function will run but the button
+                    //will NOT appear, THIS DOES NOT WORK.
+                    //onPressed: onPressed2(),
 
                     //The text of the button works separately from the button
                     //itself so we must update it when the switch is changed.
