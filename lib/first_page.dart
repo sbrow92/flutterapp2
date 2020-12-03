@@ -34,19 +34,13 @@ class _MyFirstPageState extends State<MyFirstPage> {
 
     Object onPressed2() {
       if (_enabled) {
-        print(
-            'onPressed2 returning a null as the result of running the anonymous function');
+        print('onPressed1 returning address of anon func but NOT running it');
         return () {
-          print('Anon func now running, returning a null');
-          //These () are what makes the anonymous function run
-          //every time that onPressed2 is called,
-          //and that happens every time the build runs.
-          //Since the anonymous function does not return anything
-          //a null is sent back to who ever called onPressed2.
-          //This means that the button will never show using onPressed2.
-        }();
+          _count = 0;
+          print('Button Pressed $_count');
+        };
       } else {
-        print('onPressed2 returning NULL');
+        print('onPressed1 returning NULL');
         return null;
       }
     }
@@ -141,7 +135,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     //At this time the button will appear and be enabled.
                     //If _enabled is false onPressed1 will return
                     //null and the button will disappear and be disabled.
-                    onPressed: onPressed1(),
+                    onPressed: onPressed2(),
 
                     //If we call onPressed2 instead of onPressed1 the
                     //anonymous function will run but the button
